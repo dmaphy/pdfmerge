@@ -15,6 +15,14 @@ one directory, change to that directory and run something like
  pdfmerge file1.pdf file2.pdf... fileN.pdf outfile.pdf
 
 
+Sources
+=======
+
+You can get the sources via
+
+ git clone https://github.com/dmaphy/pdfmerge.git
+
+
 Bugs
 ====
 
