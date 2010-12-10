@@ -1,5 +1,5 @@
 2010-12-09 Dominic Hopf <dmaphy@googlemail.com>
 
- * pdfmerge: applied patch from Knut Omang provided with RHBZ #657697, this
+ * pdfmerge: Applied patch from Knut Omang provided with RHBZ #657697, this
  fixes several issues with Ghostscript reported in RedHat Bugzilla #642427 and
- others
+ others.
