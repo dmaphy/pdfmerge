@@ -15,9 +15,16 @@ one directory, change to that directory and run something like
  pdfmerge file1.pdf file2.pdf... fileN.pdf outfile.pdf
 
 
+Bugs
+====
+
+If you have any bugreports, improvements, suggestions or anything else you can 
+report those at https://github.com/dmaphy/pdfmerge/issues
+
+
 Contact
 =======
 
-If you have any bugreports, suggestions, improvements, patches or anything else,
-feel free to write a mail to Dominic Hopf <dmaphy@googlemail.com> and he will
-apply your patches. 
+In case of any question, feel free to write a mail to
+
+	Dominic Hopf <dmaphy@googlemail.com>
