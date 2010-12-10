@@ -1,7 +1,7 @@
 About
 =====
 
-pdf4mergeunix has been written in 2003 by Didier F.B Casse <didier@microtronyx.com>.
+pdfmerge4unix has been written in 2003 by Didier F.B Casse <didier@microtronyx.com>.
 In 2010 it seemed pretty discontinued, so Dominic Hopf resumed this work to fix
 some issues reported to the Fedora package of pdfmerge in the meanwhile.
 
@@ -14,3 +14,10 @@ one directory, change to that directory and run something like
 
  pdfmerge file1.pdf file2.pdf... fileN.pdf outfile.pdf
 
+
+Contact
+=======
+
+If you have any bugreports, suggestions, improvements, patches or anything else,
+feel free to write a mail to Dominic Hopf <dmaphy@googlemail.com> and he will
+apply your patches. 
