@@ -3,8 +3,11 @@ use Getopt::Long;
 use Term::ANSIColor;
 
 ############################################################################
-#   This is pdfmerge4unix version 1.0-2.
-#   pdfmerge4unix is a command line utility program that merges pdf files in unix-based platforms.
+#   This is pdfmerge4unix version 1.0.3
+#
+#   pdfmerge4unix is a command line utility program that merges pdf
+#   files in unix-based platforms.
+#
 #   Copyright (C) 2003 Didier F.B Casse
 #
 #   This program is free software; you can redistribute it and/or modify
