@@ -32,8 +32,6 @@ use Term::ANSIColor;
 
 ############################################################################
 
-
-
 GetOptions('help', 'h');
 
 $usage = <<"END_OF_USAGE";
@@ -52,7 +50,6 @@ URL:       http://www.microtronyx.com/pdfmerge4unix
 END_OF_USAGE
 
 die $usage if ($opt_help or $opt_h or (scalar(@ARGV)==0));
-
 
 
 $incantation = << "END_OF_INCANTATION";
@@ -75,26 +72,20 @@ $incantation = << "END_OF_INCANTATION";
 END_OF_INCANTATION
 
 
-
-
-
 # get it started
 
 
 if (!scalar(@ARGV)==0){
-
 
 # $mergedfile gets the output file!
 $mergedfile=pop(@ARGV);
 
 if (-e $mergedfile){print color("red"), "outfile.pdf should not exists, it's the name of your output file!\n", color("reset"); exit 0;}
 
-
 # Dealing with merged.ps 
 
 open(FILE,">merged.ps") || die "can't open merged.ps";
 print FILE $incantation;
-
 
 foreach $ARGV (@ARGV){
 
@@ -112,18 +103,3 @@ close(FILE);
 #cleanup
 
 unlink("./merged.ps");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
