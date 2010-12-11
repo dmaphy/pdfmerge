@@ -15,6 +15,13 @@ one directory, change to that directory and run something like
  pdfmerge file1.pdf file2.pdf... fileN.pdf outfile.pdf
 
 
+Download
+========
+
+The current version of pdfmerge is 1.0.3. You can obtain it from here:
+http://dmaphy.github.com/pdfmerge/pdfmerge-1.0.3.tar.bz2
+
+
 Sources
 =======
 
