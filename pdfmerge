@@ -30,18 +30,20 @@ use Term::ANSIColor;
 GetOptions('help', 'h');
 
 $usage = <<"END_OF_USAGE";
-This is pdfmerge4unix version 1.0-2. pdfmerge4unix is a command line utility program that merges pdf files in unix-based platforms
+This is pdfmerge4unix version 1.0.3. pdfmerge4unix is a command line utility
+program that merges pdf files in unix-based platforms
 
 Syntax:  pdfmerge file1.pdf file2.pdf... fileN.pdf outfile.pdf
-         All files to concatenate must either be in the current directory 
+         All files to concatenate must either be in the current directory
          or any additional directories must be specified with -I<dir>
-         This is to avoid 
-Options:      
+         This is to avoid
+
+Options:
             --help                  displays this brief help; same as -h
             -I<dir>                 Add a directory to the list of accepted input directories
                                     By default only current directory is accepted
-Author:    Didier F.B Casse <didier\@microtronyx.com>
-URL:       http://www.microtronyx.com/pdfmerge4unix
+
+URL:       http://dmaphy.github.com/pdfmerge/
 END_OF_USAGE
 
 
@@ -80,19 +82,19 @@ if ( ! scalar(@ARGV) == 0 )
 	}
 
 
-	# Dealing with merged.ps 
+	# Dealing with merged.ps
 
 	open (FILE, ">merged.ps") || die "can't open merged.ps";
 	print FILE $incantation;
 
 	foreach $ARGV (@ARGV)
 	{
-		print FILE "\n_begin_job_\n"; 
+		print FILE "\n_begin_job_\n";
 		print FILE "(./$ARGV)run\n";print FILE "_end_job_\n";
 	}
 
 }
-	
+
 close(FILE);
 
 `ps2pdf -I. merged.ps $mergedfile`;
