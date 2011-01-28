@@ -1,3 +1,9 @@
+2011-01-28 Dominic Hopf <dmaphy@googlemail.com>
+
+ * release.sh: compress tarball separately from creating it. This makes the 
+ script a bit more compatible with other systems where the tar command hasn't
+ a j-flag
+
 2010-12-09 Dominic Hopf <dmaphy@googlemail.com>
 
  * pdfmerge: Applied patch from Knut Omang provided with RHBZ #657697, this
