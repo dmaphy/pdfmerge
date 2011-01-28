@@ -72,7 +72,8 @@ echo -e "\t\t\t\t $txtgrn done $txtrst"
 
 echo -n "Creating release tarball $PROGRAM-$VERSION.tar.bz2..."
 cd ./releases/
-tar cjf "$PROGRAM-$VERSION.tar.bz2" "$PROGRAM-$VERSION"
+tar cf "$PROGRAM-$VERSION.tar" "$PROGRAM-$VERSION"
+bzip2 "$PROGRAM-$VERSION.tar"
 echo -e "\t\t\t $txtgrn done $txtrst"
 
 echo -e "\n$txtgrn Your release was successfully created $txtrst"
