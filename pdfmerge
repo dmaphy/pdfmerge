@@ -81,9 +81,15 @@ open (FILE, ">merged.ps") || die "can't open merged.ps";
 print FILE $incantation;
 foreach $ARGV (@ARGV)
 {
-	print FILE "\n_begin_job_\n";
-	print FILE "(./$ARGV)run\n";
-	print FILE "_end_job_\n";
+    if ( ! -e $ARGV )
+    {
+	print color("red"), "Input file $ARGV does not exist\n", color("reset");
+	exit 0;
+    }
+
+    print FILE "\n_begin_job_\n";
+    print FILE "(./$ARGV)run\n";
+    print FILE "_end_job_\n";
 }
 
 close(FILE);
