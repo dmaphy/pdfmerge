@@ -76,7 +76,7 @@ if ( ! scalar(@ARGV) == 0 )
 
 	if ( -e $mergedfile )
 	{
-		print color("red"), "outfile.pdf should not exists, it's the name of your output file!\n", color("reset");
+		print color("red"), "$mergedfile should not exist, it's the name of your output file!\n", color("reset");
 		exit 0;
 	}
 
