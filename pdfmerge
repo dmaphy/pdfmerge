@@ -95,7 +95,7 @@ foreach $ARGV (@ARGV)
 
 close(FILE);
 
-my $output = `ps2pdf -I. merged.ps $mergedfile`;
+`ps2pdf -I. merged.ps $mergedfile`;
 
 if ( $? == 0 )
 {
@@ -106,7 +106,7 @@ if ( $? == 0 )
 
 else
 {
-    print color("red"), "Merge was not successful:\n", color("reset");
+    print color("red"), "Merge was not successful\n", color("reset");
     print $output;
     unlink("./merged.ps"); # cleanup
     exit 1;
