@@ -46,7 +46,7 @@ URL:       http://dmaphy.github.com/pdfmerge/
 END_OF_USAGE
 
 
-die $usage if ( $opt_help or $opt_h or ( scalar(@ARGV) == 0 ) );
+die $usage if ( $opt_help or $opt_h or ( scalar(@ARGV) == 0 ) or ( scalar(@ARGV) < 3 ) );
 
 
 $incantation = << "END_OF_INCANTATION";
@@ -69,29 +69,21 @@ $incantation = << "END_OF_INCANTATION";
 END_OF_INCANTATION
 
 
-if ( ! scalar(@ARGV) == 0 )
+$mergedfile = pop(@ARGV);
+
+if ( -e $mergedfile )
 {
-	# $mergedfile gets the output file!
-	$mergedfile = pop(@ARGV);
+	print color("red"), "$mergedfile should not exist, it's the name of your output file!\n", color("reset");
+	exit 0;
+}
 
-	if ( -e $mergedfile )
-	{
-		print color("red"), "$mergedfile should not exist, it's the name of your output file!\n", color("reset");
-		exit 0;
-	}
-
-
-	# Dealing with merged.ps
-
-	open (FILE, ">merged.ps") || die "can't open merged.ps";
-	print FILE $incantation;
-
-	foreach $ARGV (@ARGV)
-	{
-		print FILE "\n_begin_job_\n";
-		print FILE "(./$ARGV)run\n";print FILE "_end_job_\n";
-	}
-
+open (FILE, ">merged.ps") || die "can't open merged.ps";
+print FILE $incantation;
+foreach $ARGV (@ARGV)
+{
+	print FILE "\n_begin_job_\n";
+	print FILE "(./$ARGV)run\n";
+	print FILE "_end_job_\n";
 }
 
 close(FILE);
