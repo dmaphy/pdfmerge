@@ -84,6 +84,7 @@ foreach $ARGV (@ARGV)
     if ( ! -e $ARGV )
     {
         print color("red"), "Input file $ARGV does not exist\n", color("reset");
+        unlink("./merged.ps"); # cleanup
         exit 1;
     }
 
@@ -99,6 +100,7 @@ my $output = `ps2pdf -I. merged.ps $mergedfile`;
 if ( $? == 0 )
 {
     print color("green"), "Successfully merged to $mergedfile\n", color("reset");
+    unlink("./merged.ps"); # cleanup
     exit 0;
 }
 
@@ -106,7 +108,6 @@ else
 {
     print color("red"), "Merge was not successful:\n", color("reset");
     print $output;
+    unlink("./merged.ps"); # cleanup
     exit 1;
 }
-
-unlink("./merged.ps"); # cleanup
