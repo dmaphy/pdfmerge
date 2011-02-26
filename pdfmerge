@@ -83,8 +83,8 @@ foreach $ARGV (@ARGV)
 {
     if ( ! -e $ARGV )
     {
-	print color("red"), "Input file $ARGV does not exist\n", color("reset");
-	exit 1;
+        print color("red"), "Input file $ARGV does not exist\n", color("reset");
+        exit 1;
     }
 
     print FILE "\n_begin_job_\n";
@@ -94,6 +94,19 @@ foreach $ARGV (@ARGV)
 
 close(FILE);
 
-`ps2pdf -I. merged.ps $mergedfile`;
+my $output = `ps2pdf -I. merged.ps $mergedfile`;
+
+if ( $? == 0 )
+{
+    print color("green"), "Successfully merged to $mergedfile\n", color("reset");
+    exit 0;
+}
+
+else
+{
+    print color("red"), "Merge was not successful:\n", color("reset");
+    print $output;
+    exit 1;
+}
 
 unlink("./merged.ps"); # cleanup
