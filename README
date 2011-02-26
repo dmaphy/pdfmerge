@@ -14,6 +14,10 @@ one directory, change to that directory and run something like
 
  pdfmerge file1.pdf file2.pdf... fileN.pdf outfile.pdf
 
+You can even mention PDF files in subdirectories like this:
+
+ pdfmerge subdir1/file1.pdf subdir2/file2.pdf outfile.pdf
+
 
 Download
 ========
@@ -33,7 +37,7 @@ You can get the sources via
 Bugs
 ====
 
-If you have any bugreports, improvements, suggestions or anything else you can 
+If you have any bugreports, improvements, suggestions or anything else you can
 report those at https://github.com/dmaphy/pdfmerge/issues
 
 
