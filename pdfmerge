@@ -34,8 +34,8 @@ This is pdfmerge4unix version 1.0.3. pdfmerge4unix is a command line utility
 program that merges pdf files in unix-based platforms
 
 Syntax:  pdfmerge file1.pdf file2.pdf... fileN.pdf outfile.pdf
-         All files to concatenate must either be in the current directory
-         or any additional directories must be specified with -I<dir>
+         All files to concatenate must either be in the current directory or
+         in a subdirectory of the current directory.
 
 Options:
             --help                  displays this brief help; same as -h
