@@ -74,7 +74,7 @@ $mergedfile = pop(@ARGV);
 if ( -e $mergedfile )
 {
 	print color("red"), "$mergedfile should not exist, it's the name of your output file!\n", color("reset");
-	exit 0;
+	exit 1;
 }
 
 open (FILE, ">merged.ps") || die "can't open merged.ps";
@@ -84,7 +84,7 @@ foreach $ARGV (@ARGV)
     if ( ! -e $ARGV )
     {
 	print color("red"), "Input file $ARGV does not exist\n", color("reset");
-	exit 0;
+	exit 1;
     }
 
     print FILE "\n_begin_job_\n";
