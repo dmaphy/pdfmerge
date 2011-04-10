@@ -55,17 +55,17 @@ $incantation = << "END_OF_INCANTATION";
 %!PS
 /_begin_job_
 {
-        /tweak_save save def
-        /tweak_dc countdictstack def
-        /tweak_oc count 1 sub def
-        userdict begin
+		/tweak_save save def
+		/tweak_dc countdictstack def
+		/tweak_oc count 1 sub def
+		userdict begin
 }bind def
 
 /_end_job_
 {
-        count tweak_oc sub{pop}repeat
-        countdictstack tweak_dc sub{end}repeat
-        tweak_save restore
+		count tweak_oc sub{pop}repeat
+		countdictstack tweak_dc sub{end}repeat
+		tweak_save restore
 }bind def
 
 END_OF_INCANTATION
@@ -86,9 +86,9 @@ foreach $ARGV (@ARGV)
 	if ( ! -e $ARGV )
 	{
 		print color("red"), "Input file $ARGV does not exist\n", color("reset");
-        	unlink("./merged.ps"); # cleanup
-        	exit 1;
-    	}
+		unlink("./merged.ps"); # cleanup
+		exit 1;
+	}
 
 	print FILE "\n_begin_job_\n";
 	print FILE "(./$ARGV)run\n";
@@ -99,15 +99,15 @@ close(FILE);
 `ps2pdf -I. -I..  merged.ps $mergedfile`;
 if ( $? == 0 )
 {
-    print color("green"), "Successfully merged to $mergedfile\n", color("reset");
-    unlink("./merged.ps"); # cleanup
-    exit 0;
+	print color("green"), "Successfully merged to $mergedfile\n", color("reset");
+	unlink("./merged.ps"); # cleanup
+	exit 0;
 }
 
 else
 {
-    print color("red"), "Merge was not successful\n", color("reset");
-    print $output;
-    unlink("./merged.ps"); # cleanup
-    exit 1;
+	print color("red"), "Merge was not successful\n", color("reset");
+	print $output;
+	unlink("./merged.ps"); # cleanup
+	exit 1;
 }
