@@ -18,6 +18,9 @@ You can even mention PDF files in subdirectories like this:
 
  pdfmerge subdir1/file1.pdf subdir2/file2.pdf outfile.pdf
 
+And last but not least you can access a directory from a higher level:
+
+ pdfmerge file1.pdf ../file2.pdf outfile.pdf
 
 Download
 ========
