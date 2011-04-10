@@ -10,6 +10,8 @@ use Term::ANSIColor;
 #   files in unix-based platforms.
 #
 #   Copyright (C) 2003 Didier F.B Casse
+#   Copyright (C) 2010-2011 Dominic Hopf <dmaphy@googlemail.com>
+#   Copyright (C) 2011 Michael Spahn <anyone90@googlemail.com>
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
