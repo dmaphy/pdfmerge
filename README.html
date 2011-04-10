@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.6: http://docutils.sourceforge.net/" />
+<meta name="generator" content="Docutils 0.7: http://docutils.sourceforge.net/" />
 <title></title>
 <style type="text/css">
 
 /*
 :Author: David Goodger (goodger@python.org)
-:Id: $Id: html4css1.css 5951 2009-05-18 18:03:10Z milde $
+:Id: $Id: html4css1.css 6253 2010-03-02 00:24:53Z milde $
 :Copyright: This stylesheet has been placed in the public domain.
 
 Default cascading style sheet for the HTML output of Docutils.
@@ -157,15 +157,21 @@ h2.subtitle {
 hr.docutils {
   width: 75% }
 
-img.align-left, .figure.align-left{
+img.align-left, .figure.align-left, object.align-left {
   clear: left ;
   float: left ;
   margin-right: 1em }
 
-img.align-right, .figure.align-right {
+img.align-right, .figure.align-right, object.align-right {
   clear: right ;
   float: right ;
   margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .align-left {
   text-align: left }
@@ -319,11 +325,17 @@ some issues reported to the Fedora package of pdfmerge in the meanwhile.</p>
 one directory, change to that directory and run something like</p>
 <blockquote>
 pdfmerge file1.pdf file2.pdf... fileN.pdf outfile.pdf</blockquote>
+<p>You can even mention PDF files in subdirectories like this:</p>
+<blockquote>
+pdfmerge subdir1/file1.pdf subdir2/file2.pdf outfile.pdf</blockquote>
+<p>And last but not least you can access a directory from a higher level:</p>
+<blockquote>
+pdfmerge file1.pdf ../file2.pdf outfile.pdf</blockquote>
 </div>
 <div class="section" id="download">
 <h1>Download</h1>
-<p>The current version of pdfmerge is 1.0.3. You can obtain it from here:
-<a class="reference external" href="http://dmaphy.github.com/pdfmerge/pdfmerge-1.0.3.tar.bz2">http://dmaphy.github.com/pdfmerge/pdfmerge-1.0.3.tar.bz2</a></p>
+<p>The current version of pdfmerge is 1.0.4. You can obtain it from here:
+<a class="reference external" href="http://dmaphy.github.com/pdfmerge/pdfmerge-1.0.4.tar.bz2">http://dmaphy.github.com/pdfmerge/pdfmerge-1.0.4.tar.bz2</a></p>
 </div>
 <div class="section" id="sources">
 <h1>Sources</h1>
