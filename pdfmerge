@@ -4,7 +4,7 @@ use Getopt::Long;
 use Term::ANSIColor;
 
 ############################################################################
-#   This is pdfmerge4unix version 1.0.3
+#   This is pdfmerge4unix version 1.0.4
 #
 #   pdfmerge4unix is a command line utility program that merges pdf
 #   files in unix-based platforms.
@@ -30,7 +30,7 @@ use Term::ANSIColor;
 GetOptions('help', 'h');
 
 $usage = <<"END_OF_USAGE";
-This is pdfmerge4unix version 1.0.3. pdfmerge4unix is a command line utility
+This is pdfmerge4unix version 1.0.4. pdfmerge4unix is a command line utility
 program that merges pdf files in unix-based platforms
 
 Syntax:  pdfmerge file1.pdf file2.pdf... fileN.pdf outfile.pdf
