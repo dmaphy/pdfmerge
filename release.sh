@@ -49,7 +49,7 @@ else
 fi
 
 
-mkdir -p "./releases/"
+mkdir "./releases/"
 
 
 VERSION=$2
