@@ -41,8 +41,6 @@ Syntax:  pdfmerge file1.pdf file2.pdf... fileN.pdf outfile.pdf
 
 Options:
             --help                  displays this brief help; same as -h
-            -I<dir>                 Add a directory to the list of accepted input directories
-                                    By default only current directory is accepted
 
 URL:       http://dmaphy.github.com/pdfmerge/
 END_OF_USAGE
