@@ -2,6 +2,7 @@
 
 use Getopt::Long;
 use Term::ANSIColor;
+use File::stat;
 
 ############################################################################
 #   This is pdfmerge4unix version 1.0.4
@@ -86,6 +87,25 @@ foreach $ARGV (@ARGV)
 		print color("red"), "Input file $ARGV does not exist\n", color("reset");
 		unlink("./merged.ps"); # cleanup
 		exit 1;
+	}
+
+
+	if (my $fileinfo = stat($ARGV))
+	{
+		if ($< != 0 && $fileinfo->uid != $<)
+		{
+			print color("red"), "You are not owner of file $ARGV. Will not merge this.\n", color("reset");
+			unlink("./merged.ps");
+			exit 1;
+		}
+	}
+
+	else
+	{
+		print color("red"), "Can not stat file $ARGV. Exiting.\n", color("reset");
+		unlink("./merged.ps");
+		exit 1;
+
 	}
 
 	print FILE "\n_begin_job_\n";
