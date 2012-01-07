@@ -85,7 +85,7 @@ foreach $ARGV (@ARGV)
 	if ( ! -e $ARGV )
 	{
 		print color("red"), "Input file $ARGV does not exist\n", color("reset");
-		unlink("./merged.ps"); # cleanup
+		unlink("./merged.ps");
 		exit 1;
 	}
 
@@ -118,7 +118,7 @@ close(FILE);
 if ( $? == 0 )
 {
 	print color("green"), "Successfully merged to $mergedfile\n", color("reset");
-	unlink("./merged.ps"); # cleanup
+	unlink("./merged.ps");
 	exit 0;
 }
 
@@ -126,6 +126,6 @@ else
 {
 	print color("red"), "Merge was not successful\n", color("reset");
 	print $output;
-	unlink("./merged.ps"); # cleanup
+	unlink("./merged.ps");
 	exit 1;
 }
