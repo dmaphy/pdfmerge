@@ -1,3 +1,8 @@
+2012-01-07  Dominic Hopf  <dmaphy@googlemail.com>
+
+ * pdfmerge: do not merge foreign documents if pdfmerge is not ran as root
+
+
 2011-04-10 Michael Spahn <any0n3@fedoraproject.org>
 
  * pdfmerge: Fixed bug #1. (https://github.com/dmaphy/pdfmerge/issues#issue/1)
@@ -12,7 +17,7 @@
 
 2011-01-28 Dominic Hopf <dmaphy@googlemail.com>
 
- * release.sh: compress tarball separately from creating it. This makes the 
+ * release.sh: compress tarball separately from creating it. This makes the
  script a bit more compatible with other systems where the tar command hasn't
  a j-flag
 
