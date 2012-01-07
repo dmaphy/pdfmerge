@@ -1,0 +1,10 @@
+TODO
+====
+
+- also check for the mode of the files to be merged (should not be
+  word-writable; 644 shoud be suitable for PDF documents, shouldn't it?)
+
+- use File::Temp to generate a temporary file in /tmp instead of .merged.ps
+
+- try to avoid the repetition of unlink("./merged.ps");, maybe write a
+  quit() sub or something similar
