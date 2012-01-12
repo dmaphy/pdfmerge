@@ -105,6 +105,7 @@ if ( $? == 0 )
 else
 {
 	print color("red"), "Merge was not successful\n", color("reset");
+	unlink($mergedfile);
 	unlink("./merged.ps");
 	exit 1;
 }
