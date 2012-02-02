@@ -48,8 +48,15 @@ END_OF_USAGE
 
 die $usage if ( $opt_help or $opt_h or ( scalar(@ARGV) == 0 ) or ( scalar(@ARGV) < 3 ) );
 
+$mergedfile = pop(@ARGV);
+if ( -e $mergedfile )
+{
+	print color("red"), "$mergedfile should not exist, it's the name of your output file!\n", color("reset");
+	exit 1;
+}
 
-$incantation = << "END_OF_INCANTATION";
+
+my $filecontent = << "END_OF_INCANTATION";
 %!PS
 /_begin_job_
 {
@@ -69,36 +76,24 @@ $incantation = << "END_OF_INCANTATION";
 END_OF_INCANTATION
 
 
-$mergedfile = pop(@ARGV);
-
-if ( -e $mergedfile )
-{
-	print color("red"), "$mergedfile should not exist, it's the name of your output file!\n", color("reset");
-	exit 1;
-}
-
-open (FILE, ">merged.ps") || die "can't open merged.ps";
-print FILE $incantation;
 foreach $ARGV (@ARGV)
 {
 	if ( ! -e $ARGV )
 	{
 		print color("red"), "Input file $ARGV does not exist\n", color("reset");
-		unlink("./merged.ps");
 		exit 1;
 	}
 
-	print FILE "\n_begin_job_\n";
-	print FILE "(./$ARGV)run\n";
-	print FILE "_end_job_\n";
+	$filecontent .= "\n_begin_job_\n";
+	$filecontent .= "(./$ARGV)run\n";
+	$filecontent .= "_end_job_\n";
 }
 
-close(FILE);
-`ps2pdf -I. -I..  merged.ps $mergedfile`;
+`echo "$filecontent" | ps2pdf -P - $mergedfile`;
+
 if ( $? == 0 )
 {
 	print color("green"), "Successfully merged to $mergedfile\n", color("reset");
-	unlink("./merged.ps");
 	exit 0;
 }
 
@@ -106,6 +101,5 @@ else
 {
 	print color("red"), "Merge was not successful\n", color("reset");
 	unlink($mergedfile);
-	unlink("./merged.ps");
 	exit 1;
 }
