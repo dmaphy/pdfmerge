@@ -89,11 +89,11 @@ foreach $ARGV (@ARGV)
 	$filecontent .= "_end_job_\n";
 }
 
-`echo "$filecontent" | ps2pdf -P - $mergedfile`;
+`echo "$filecontent" | ps2pdf -P - "$mergedfile"`;
 
 if ( $? == 0 )
 {
-	print color("green"), "Successfully merged to $mergedfile\n", color("reset");
+	print color("green"), "Successfully merged to '$mergedfile'\n", color("reset");
 	exit 0;
 }
 
