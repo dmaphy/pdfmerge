@@ -25,10 +25,10 @@ And last but not least you can access a directory from a higher level:
 Download
 ========
 
-The current version of pdfmerge is 1.0.4. You can obtain it from here:
-http://dmaphy.github.com/pdfmerge/pdfmerge-1.0.4.tar.bz2
+The current version of pdfmerge is 1.0.5. You can obtain it from here:
+https://github.com/dmaphy/pdfmerge/archive/1.0.5.tar.gz
 
-Checksums can be found at 
+Checksums can be found at
 http://dmaphy.github.com/pdfmerge/md5sums
 http://dmaphy.github.com/pdfmerge/sha1sums
 
