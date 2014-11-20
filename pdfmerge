@@ -41,7 +41,7 @@ Syntax:  pdfmerge file1.pdf file2.pdf... fileN.pdf outfile.pdf
 
 Options:
             --help                  displays this brief help; same as -h
-            --force					override existing file; same as -f
+            --force                 overwrite existing file; same as -f
 
 URL:       http://dmaphy.github.com/pdfmerge/
 END_OF_USAGE
@@ -52,8 +52,8 @@ die $usage if ($opt_help or $opt_h or (scalar(@ARGV) == 0) or (scalar(@ARGV) < 3
 $mergedfile = pop(@ARGV);
 
 if (!$opt_force and !$opt_f and -e $mergedfile) {
-	print color("red"), "$mergedfile should not exist, it's the name of your output file!\n", color("reset");
-	exit 1;
+    print color("red"), "$mergedfile should not exist, it's the name of your output file!\n", color("reset");
+    exit 1;
 }
 
 
@@ -61,41 +61,41 @@ my $filecontent = << "END_OF_INCANTATION";
 %!PS
 /_begin_job_
 {
-		/tweak_save save def
-		/tweak_dc countdictstack def
-		/tweak_oc count 1 sub def
-		userdict begin
+        /tweak_save save def
+        /tweak_dc countdictstack def
+        /tweak_oc count 1 sub def
+        userdict begin
 }bind def
 
 /_end_job_
 {
-		count tweak_oc sub{pop}repeat
-		countdictstack tweak_dc sub{end}repeat
-		tweak_save restore
+        count tweak_oc sub{pop}repeat
+        countdictstack tweak_dc sub{end}repeat
+        tweak_save restore
 }bind def
 
 END_OF_INCANTATION
 
 
 foreach $ARGV (@ARGV) {
-	if (! -e $ARGV)
-	{
-		print color("red"), "Input file $ARGV does not exist\n", color("reset");
-		exit 1;
-	}
+    if (! -e $ARGV)
+    {
+        print color("red"), "Input file $ARGV does not exist\n", color("reset");
+        exit 1;
+    }
 
-	$filecontent .= "\n_begin_job_\n";
-	$filecontent .= "(./$ARGV)run\n";
-	$filecontent .= "_end_job_\n";
+    $filecontent .= "\n_begin_job_\n";
+    $filecontent .= "(./$ARGV)run\n";
+    $filecontent .= "_end_job_\n";
 }
 
 `echo "$filecontent" | ps2pdf -P - "$mergedfile"`;
 
 if ($? == 0) {
-	print color("green"), "Successfully merged to '$mergedfile'\n", color("reset");
-	exit 0;
+    print color("green"), "Successfully merged to '$mergedfile'\n", color("reset");
+    exit 0;
 } else {
-	print color("red"), "Merge was not successful\n", color("reset");
-	unlink($mergedfile);
-	exit 1;
+    print color("red"), "Merge was not successful\n", color("reset");
+    unlink($mergedfile);
+    exit 1;
 }
