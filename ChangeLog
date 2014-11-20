@@ -1,3 +1,6 @@
+2014-11-20 Michael Spahn <michael@spahn.me>
+ * pdfmerge: You are now able to use -f / --force to overwrite existing files.
+
 2011-04-10  Michael Spahn  <any0n3@fedoraproject.org>
  * pdfmerge: Fixed bug #1. (https://github.com/dmaphy/pdfmerge/issues#issue/1)
  You are able to open files from one level higher.
