@@ -11,7 +11,7 @@ use Term::ANSIColor;
 #
 #   Copyright (C) 2003 Didier F.B Casse
 #   Copyright (C) 2010-2012 Dominic Hopf <dmaphy@googlemail.com>
-#   Copyright (C) 2011 Michael Spahn <anyone90@googlemail.com>
+#   Copyright (C) 2014 Michael Spahn <michael@spahn.me>
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ use Term::ANSIColor;
 #
 ############################################################################
 
-GetOptions('help', 'h');
+GetOptions('help', 'h', 'force', 'f');
 
 $usage = <<"END_OF_USAGE";
 This is pdfmerge4unix version 1.0.4. pdfmerge4unix is a command line utility
@@ -41,16 +41,17 @@ Syntax:  pdfmerge file1.pdf file2.pdf... fileN.pdf outfile.pdf
 
 Options:
             --help                  displays this brief help; same as -h
+            --force					override existing file; same as -f
 
 URL:       http://dmaphy.github.com/pdfmerge/
 END_OF_USAGE
 
 
-die $usage if ( $opt_help or $opt_h or ( scalar(@ARGV) == 0 ) or ( scalar(@ARGV) < 3 ) );
+die $usage if ($opt_help or $opt_h or (scalar(@ARGV) == 0) or (scalar(@ARGV) < 3));
 
 $mergedfile = pop(@ARGV);
-if ( -e $mergedfile )
-{
+
+if (!$opt_force and !$opt_f and -e $mergedfile) {
 	print color("red"), "$mergedfile should not exist, it's the name of your output file!\n", color("reset");
 	exit 1;
 }
@@ -76,9 +77,8 @@ my $filecontent = << "END_OF_INCANTATION";
 END_OF_INCANTATION
 
 
-foreach $ARGV (@ARGV)
-{
-	if ( ! -e $ARGV )
+foreach $ARGV (@ARGV) {
+	if (! -e $ARGV)
 	{
 		print color("red"), "Input file $ARGV does not exist\n", color("reset");
 		exit 1;
@@ -91,14 +91,10 @@ foreach $ARGV (@ARGV)
 
 `echo "$filecontent" | ps2pdf -P - "$mergedfile"`;
 
-if ( $? == 0 )
-{
+if ($? == 0) {
 	print color("green"), "Successfully merged to '$mergedfile'\n", color("reset");
 	exit 0;
-}
-
-else
-{
+} else {
 	print color("red"), "Merge was not successful\n", color("reset");
 	unlink($mergedfile);
 	exit 1;
