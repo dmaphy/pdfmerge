@@ -47,9 +47,17 @@ URL:       http://dmaphy.github.com/pdfmerge/
 END_OF_USAGE
 
 
-die $usage if ($opt_help or $opt_h or (scalar(@ARGV) == 0) or (scalar(@ARGV) < 3));
+die $usage if $opt_help or $opt_h;
 
 $mergedfile = pop(@ARGV);
+
+foreach $ARGV (@ARGV) {
+	if ($ARGV !~ /\/$mergedfile$/) {
+		$i++;
+	}
+}
+# Wrong parameters or only one PDF defined
+die $usage if $i < 2;
 
 if (!$opt_force and !$opt_f and -e $mergedfile) {
     print color("red"), "$mergedfile should not exist, it's the name of your output file!\n", color("reset");
@@ -81,7 +89,7 @@ foreach $ARGV (@ARGV) {
     if (! -e $ARGV) {
         print color("red"), "Input file $ARGV does not exist\n", color("reset");
         exit 1;
-    } elsif ($ARGV eq $mergedfile) {
+    } elsif ($ARGV =~ /\/$mergedfile$/) {
 		# Skip this file if is destination file.
 		# 
 		# For example using:
@@ -89,12 +97,21 @@ foreach $ARGV (@ARGV) {
         next;
     }
 
+	# Determine if this is an absolute or relative path
+	if ($ARGV =~ /^\//) {
+		$prefix = '';
+	} else {
+		$prefix = './';
+	}
+	
+	$filepath = $prefix . $ARGV;
+
     $filecontent .= "\n_begin_job_\n";
-    $filecontent .= "(./$ARGV)run\n";
+    $filecontent .= "($filepath)runlibfile\n";
     $filecontent .= "_end_job_\n";
 }
 
-`echo "$filecontent" | ps2pdf -P - "$mergedfile"`;
+`echo "$filecontent" | ps2pdf -dNOSAFER -P - "$mergedfile"`;
 
 if ($? == 0) {
     print color("green"), "Successfully merged to '$mergedfile'\n", color("reset");
