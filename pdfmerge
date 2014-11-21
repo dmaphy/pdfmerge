@@ -78,10 +78,15 @@ END_OF_INCANTATION
 
 
 foreach $ARGV (@ARGV) {
-    if (! -e $ARGV)
-    {
+    if (! -e $ARGV) {
         print color("red"), "Input file $ARGV does not exist\n", color("reset");
         exit 1;
+    } elsif ($ARGV eq $mergedfile) {
+		# Skip this file if is destination file.
+		# 
+		# For example using:
+		#    pdfmerge *.pdf target.pdf --force
+        next;
     }
 
     $filecontent .= "\n_begin_job_\n";
