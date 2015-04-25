@@ -4,13 +4,13 @@ use Getopt::Long;
 use Term::ANSIColor;
 
 ############################################################################
-#   This is pdfmerge4unix version 1.0.4
+#   This is pdfmerge4unix version 1.0.6
 #
 #   pdfmerge4unix is a command line utility program that merges pdf
 #   files in unix-based platforms.
 #
 #   Copyright (C) 2003 Didier F.B Casse
-#   Copyright (C) 2010-2012 Dominic Hopf <dmaphy@googlemail.com>
+#   Copyright (C) 2010-2015 Dominic Hopf <dmaphy@googlemail.com>
 #   Copyright (C) 2014 Michael Spahn <michael@spahn.me>
 #
 #   This program is free software; you can redistribute it and/or modify
@@ -47,7 +47,12 @@ URL:       http://dmaphy.github.com/pdfmerge/
 END_OF_USAGE
 
 
-die $usage if $opt_help or $opt_h;
+if ($opt_help or $opt_h)
+{
+	print $usage;
+	exit 0;
+}
+
 
 $mergedfile = pop(@ARGV);
 
@@ -56,8 +61,14 @@ foreach $ARGV (@ARGV) {
 		$i++;
 	}
 }
-# Wrong parameters or only one PDF defined
-die $usage if $i < 2;
+
+if ($i < 2)
+{
+	# Wrong parameters or only one PDF defined
+	print $usage;
+	exit 0;
+}
+
 
 if (!$opt_force and !$opt_f and -e $mergedfile) {
     print color("red"), "$mergedfile should not exist, it's the name of your output file!\n", color("reset");
@@ -91,7 +102,7 @@ foreach $ARGV (@ARGV) {
         exit 1;
     } elsif ($ARGV =~ /\/$mergedfile$/) {
 		# Skip this file if is destination file.
-		# 
+		#
 		# For example using:
 		#    pdfmerge *.pdf target.pdf --force
         next;
@@ -103,7 +114,7 @@ foreach $ARGV (@ARGV) {
 	} else {
 		$prefix = './';
 	}
-	
+
 	$filepath = $prefix . $ARGV;
 
     $filecontent .= "\n_begin_job_\n";
