@@ -1,5 +1,10 @@
-2014-11-20 Michael Spahn <michael@spahn.me>
+2015-04-25  Dominic Hopf  <dmaphy@googlemail.com>
+ * pdfmerge: do not exit with error code 255 after printing out the usage (Issue#8)
+
+
+2014-11-20  Michael Spahn  <michael@spahn.me>
  * pdfmerge: You are now able to use -f / --force to overwrite existing files.
+
 
 2011-04-10  Michael Spahn  <any0n3@fedoraproject.org>
  * pdfmerge: Fixed bug #1. (https://github.com/dmaphy/pdfmerge/issues#issue/1)
@@ -15,7 +20,7 @@
 
 2011-01-28  Dominic Hopf  <dmaphy@googlemail.com>
 
- * release.sh: compress tarball separately from creating it. This makes the 
+ * release.sh: compress tarball separately from creating it. This makes the
  script a bit more compatible with other systems where the tar command hasn't
  a j-flag
 
