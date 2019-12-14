@@ -1,4 +1,7 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
+
+use strict;
+use warnings;
 
 use Getopt::Long;
 use Term::ANSIColor;
@@ -29,13 +32,11 @@ use Term::ANSIColor;
 #
 ############################################################################
 
-GetOptions('help', 'h', 'force', 'f');
-
-$usage = <<"END_OF_USAGE";
-This is pdfmerge4unix version 1.0.4. pdfmerge4unix is a command line utility
+my $usage = <<"END_OF_USAGE";
+This is pdfmerge4unix version 1.0.6. pdfmerge4unix is a command line utility
 program that merges pdf files in unix-based platforms
 
-Syntax:  pdfmerge file1.pdf file2.pdf... fileN.pdf outfile.pdf
+Syntax:  pdfmerge file1.pdf file2.pdf ... fileN.pdf outfile.pdf
          All files to concatenate must either be in the current directory or
          in a subdirectory of the current directory.
 
@@ -46,23 +47,16 @@ Options:
 URL:       http://dmaphy.github.com/pdfmerge/
 END_OF_USAGE
 
+my $force_override = 0;
 
-if ($opt_help or $opt_h)
-{
-	print $usage;
-	exit 0;
-}
+Getopt::Long::GetOptions(
+	'help|h' => sub { print $usage;	exit 0; },
+	'force|f' => sub { $force_override = 1 } );
 
 
-$mergedfile = pop(@ARGV);
+my $mergedfile = pop(@ARGV);
 
-foreach $ARGV (@ARGV) {
-	if ($ARGV !~ /\/$mergedfile$/) {
-		$i++;
-	}
-}
-
-if ($i < 2)
+if (scalar @ARGV < 1)
 {
 	# Wrong parameters or only one PDF defined
 	print $usage;
@@ -70,7 +64,7 @@ if ($i < 2)
 }
 
 
-if (!$opt_force and !$opt_f and -e $mergedfile) {
+if (not $force_override and -e $mergedfile) {
     print color("red"), "$mergedfile should not exist, it's the name of your output file!\n", color("reset");
     exit 1;
 }
@@ -97,25 +91,19 @@ END_OF_INCANTATION
 
 
 foreach $ARGV (@ARGV) {
-    if (! -e $ARGV) {
-        print color("red"), "Input file $ARGV does not exist\n", color("reset");
+    # Determine if this is an absolute or relative path
+    my $filepath = ($ARGV =~ /^\// ? '' : './') . $ARGV;
+
+    if (! -e $filepath) {
+        print color("red"), "Input file $filepath does not exist\n", color("reset");
         exit 1;
-    } elsif ($ARGV =~ /\/$mergedfile$/) {
+    } elsif ($filepath =~ /\/$mergedfile$/) {
 		# Skip this file if is destination file.
 		#
 		# For example using:
 		#    pdfmerge *.pdf target.pdf --force
         next;
     }
-
-	# Determine if this is an absolute or relative path
-	if ($ARGV =~ /^\//) {
-		$prefix = '';
-	} else {
-		$prefix = './';
-	}
-
-	$filepath = $prefix . $ARGV;
 
     $filecontent .= "\n_begin_job_\n";
     $filecontent .= "($filepath)runlibfile\n";
